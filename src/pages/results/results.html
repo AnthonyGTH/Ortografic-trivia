@@ -1,0 +1,51 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Trivia</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid *ngIf="results">
+    <ion-row>
+      <ion-col width-50 offset-25>
+        <h2 class="feedback">
+          Tus resultados
+        </h2>
+        <h1>
+          Obtuviste {{correctTotal}} de {{quizTotal}}!
+        </h1>
+        <p *ngIf="correctTotal === quizTotal">
+          Eres un maestro de la Ortografía!
+        </p>
+        <p *ngIf="correctTotal/quizTotal >= .75">
+          Casi perfecto!
+        </p>
+        <p *ngIf="correctTotal/quizTotal < .75">
+          Intentalo de nuevo
+        </p>
+        <ion-list>
+          <ion-item *ngFor="let result of results" class="category">
+            <b>Pregunta: </b> {{result.question}}
+            <br>
+            <b>Respuesta correcta: </b> {{result.correctAnswer}}
+            <br>
+            <b>Tu respuesta: </b> {{result.yourAnswer}}
+            <p *ngIf="result.correctAnswer == result.yourAnswer" style="color: #7bc878;">
+              Correcto :D
+            </p>
+            <p *ngIf="result.correctAnswer != result.yourAnswer" style="color: #c87878;">
+              Incorrecto :(
+            </p>
+          </ion-item>
+        </ion-list>
+        <div class="center">
+          <button ion-button (click)="backHome()">Inicio</button>
+          <button ion-button (click)="restart()">Reintentar</button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
